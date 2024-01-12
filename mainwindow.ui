@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>350</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>350</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>350</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>CustomIDA for MacOS</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>581</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="markdown">
+     <string>\----------------------------------------------------------------------------------------------
+
+欢迎使用CustomIDA!!
+
+这个小工具可以帮助您替换IDA的图标资源文件(目前仅支持8.3)
+
+注意事项:
+
+        1、图片的大小尽量控制在128K以内.
+
+        2、图片的尺寸最好是等比例(程序会自动进行裁剪).
+
+        3、选择IDA.app即可, 不用选择IDA64.app
+
+\----------------------------------------------------------------------------------------------
+
+
+
+
+</string>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;----------------------------------------------------------------------------------------------&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;欢迎使用CustomIDA!!&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;这个小工具可以帮助您替换IDA的图标资源文件(目前仅支持8.3)&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;注意事项:&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;        1、图片的大小尽量控制在128K以内.&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;        2、图片的尺寸最好是等比例(程序会自动进行裁剪).&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;        3、选择IDA.app即可, 不用选择IDA64.app&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;----------------------------------------------------------------------------------------------&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="minimumSize">
+    <size>
+     <width>600</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>600</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="separator"/>
+   <addaction name="actionSelectFile"/>
+   <addaction name="separator"/>
+   <addaction name="action_IDA32"/>
+   <addaction name="separator"/>
+   <addaction name="action_IDA64"/>
+   <addaction name="separator"/>
+   <addaction name="actionChangeIcon"/>
+   <addaction name="separator"/>
+   <addaction name="actionResetIcon"/>
+   <addaction name="separator"/>
+   <addaction name="actionClearLog"/>
+   <addaction name="separator"/>
+   <addaction name="actionAbout"/>
+   <addaction name="separator"/>
+  </widget>
+  <action name="actionSelectFile">
+   <property name="text">
+    <string>选择IDA.app</string>
+   </property>
+   <property name="toolTip">
+    <string>选择文件</string>
+   </property>
+  </action>
+  <action name="actionChangeIcon">
+   <property name="text">
+    <string>变更图标</string>
+   </property>
+  </action>
+  <action name="actionResetIcon">
+   <property name="text">
+    <string>还原图标</string>
+   </property>
+  </action>
+  <action name="action_IDA32">
+   <property name="text">
+    <string>选择IDA32图标</string>
+   </property>
+  </action>
+  <action name="action_IDA64">
+   <property name="text">
+    <string>选择IDA64图标</string>
+   </property>
+  </action>
+  <action name="actionClearLog">
+   <property name="text">
+    <string>清空日志</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
