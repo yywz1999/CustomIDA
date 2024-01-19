@@ -14,10 +14,62 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::InsertLog(QString insContent){
-    QTextCursor cursor = ui->textBrowser->textCursor();
-    cursor.movePosition(QTextCursor::End);
+    ui->textBrowser->moveCursor(QTextCursor::End);
     ui->textBrowser->insertPlainText(insContent);
+    ui->textBrowser->ensureCursorVisible();
 }
+
+QStringList runSystemCommand(const QString &program, const QStringList &arguments) {
+    QProcess process;
+    process.start(program, arguments);
+    process.waitForFinished();
+    QByteArray output = process.readAllStandardOutput();
+    QStringList result = QString::fromUtf8(output).split('\n', Qt::SkipEmptyParts);
+    return result;
+}
+
+QString getIDAVersion(QString filepath){
+    QString program = "strings";
+    QStringList arguments;
+    arguments << filepath;
+    QStringList stringsOutput = runSystemCommand(program, arguments);
+    QStringList filteredStrings;
+    for (int i = 0; i < stringsOutput.size(); ++i) {
+        const QString &str = stringsOutput.at(i);
+        if (str.contains("<string>") && str.contains("com.hexrays.ida")) {
+            filteredStrings.append(str);
+            qDebug() << "Next item:" << stringsOutput.at(i + 2);
+            int start = stringsOutput.at(i + 2).indexOf("<string>") + QString("<string>").length();
+            int end = stringsOutput.at(i + 2).indexOf("</string>");
+            QString extractedContent = stringsOutput.at(i + 2).mid(start, end - start);
+            return extractedContent;
+        }
+    }
+    return "";
+}
+
+
+void MainWindow::setIDA_ICON_SIZE(){
+    if(IDAVersion == "8.3.230608"){
+        IDA32_ICON48_SIZE = 6021;
+        IDA32_ICON64_SIZE = 9737;
+        IDA32_ICON96_SIZE = 20066;
+        IDA64_ICON48_SIZE = 5862;
+        IDA64_ICON64_SIZE = 9499;
+        IDA64_ICON96_SIZE = 19606;
+    }
+    if(IDAVersion == "7.5.200519"){
+        IDA32_ICON48_SIZE = 5901;
+        IDA32_ICON64_SIZE = 18062;
+        IDA32_ICON96_SIZE = 113505;
+        IDA64_ICON48_SIZE = 5901;
+        IDA64_ICON64_SIZE = 18062;
+        IDA64_ICON96_SIZE = 129065;
+    }
+}
+
+
+
 void MainWindow::on_actionSelectFile_triggered()
 {
     QString dlgTitle="选择一个文件";
@@ -37,12 +89,23 @@ void MainWindow::on_actionSelectFile_triggered()
     }else{
         InsertLog("[-]选择ida文件失败!\n");
     }
+    IDAVersion = getIDAVersion(idabinFilePath);
+    qDebug() << IDAVersion;
+    if(IDAVersion == ""){
+        InsertLog("[-]未检测到IDA版本!\n");
+        return;
+    }
+    InsertLog("[+]检测到IDA版本为"+IDAVersion+"\n");
 
 }
 
 
 void MainWindow::on_actionChangeIcon_triggered()
 {
+    if(IDAVersion == ""){
+        InsertLog("[-]未检测到IDA版本!\n");
+        return;
+    }
     if(idabinFileExists == 0){
         idabackbinFilePath = idabinFilePath.chopped(3) + "CustomIDA_ida_bak";
         ida64backbinFilePath = ida64binFilePath.chopped(5) + "CustomIDA_ida64_bak";
@@ -75,6 +138,8 @@ void MainWindow::on_actionChangeIcon_triggered()
             InsertLog("[-]未检测到IDA图标资源文件\n");
             return;
         }
+
+        //####匹配
         if(ida32_png_useful == 0){
             QFile idabinFile(idabinFilePath);
             if(idabinFile.open(QIODevice::ReadWrite)){
@@ -184,7 +249,12 @@ void MainWindow::on_actionChangeIcon_triggered()
 
 void MainWindow::on_action_IDA32_triggered()
 {
-    QString customIDA32_png_path = QFileDialog::getOpenFileName(nullptr, "请选择一张大小为不超过20000Byte的等比PNG图片~", "", "PNG 图片 (*.png)");
+    if(IDAVersion == ""){
+        InsertLog("[-]请指定IDA.app文件!\n");
+        return;
+    }
+    setIDA_ICON_SIZE();
+    QString customIDA32_png_path = QFileDialog::getOpenFileName(nullptr, "", "", "PNG 图片 (*.png)");
     if (!customIDA32_png_path.isEmpty()) {
         QImage customIDA32image(customIDA32_png_path);
         if (!customIDA32image.isNull()) {
@@ -209,6 +279,7 @@ void MainWindow::on_action_IDA32_triggered()
             qDebug() << "customIDA32imageData_48.size() ->" << customIDA32imageData_48.size();
             qDebug() << "customIDA32imageData_64.size() ->" << customIDA32imageData_64.size();
             qDebug() << "customIDA32imageData_96.size() ->" << customIDA32imageData_96.size();
+            qDebug() << "IDA32_ICON96_SIZE ->" << IDA32_ICON96_SIZE;
 
             if (customIDA32imageData_96.size() < IDA32_ICON96_SIZE-1) {
                 InsertLog("[+]文件符合要求, 点击“变更图标”进行替换.\n");
@@ -234,7 +305,12 @@ void MainWindow::on_action_IDA32_triggered()
 
 void MainWindow::on_action_IDA64_triggered()
 {
-    QString customIDA64_png_path = QFileDialog::getOpenFileName(nullptr, "请选择一张大小为不超过20000Byte的等比PNG图片~", "", "PNG 图片 (*.png)");
+    if(IDAVersion == ""){
+        InsertLog("[-]请指定IDA.app文件!\n");
+        return;
+    }
+    setIDA_ICON_SIZE();
+    QString customIDA64_png_path = QFileDialog::getOpenFileName(nullptr, "", "", "PNG 图片 (*.png)");
     if (!customIDA64_png_path.isEmpty()) {
         QImage customIDA64image(customIDA64_png_path);
         if (!customIDA64image.isNull()) {
@@ -314,6 +390,6 @@ void MainWindow::on_actionClearLog_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information(nullptr, "帮助", "目前仅支持IDA8.3 for MacOS.");
+    QMessageBox::information(nullptr, "帮助", "IDA for MacOS.");
 }
 

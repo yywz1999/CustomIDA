@@ -17,15 +17,15 @@
 #include <QDataStream>
 #include <QImageWriter>
 #include <QMessageBox>
+#include <QFile>
+#include <QByteArray>
+#include <QString>
+#include <QRegularExpression>
+#include <QVector>
+#include <QProcess>
 
 
 
-#define IDA32_ICON48_SIZE 6021 //48*48
-#define IDA32_ICON64_SIZE 9737 //64*64
-#define IDA32_ICON96_SIZE 20066 //96*96
-#define IDA64_ICON48_SIZE 5862 //48*48
-#define IDA64_ICON64_SIZE 9499 //64*64
-#define IDA64_ICON96_SIZE 19606 //96*96
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,6 +36,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QString IDAVersion = "";
+
     int idabinFileExists = 1;
     QString idabinFilePath = "";
     QString idabackbinFilePath = "";
@@ -46,6 +48,13 @@ public:
     QString ida64backbinFilePath = "";
     int ida64_png_useful = 1;
 
+
+    int IDA32_ICON48_SIZE;
+    int IDA32_ICON64_SIZE;
+    int IDA32_ICON96_SIZE;
+    int IDA64_ICON48_SIZE;
+    int IDA64_ICON64_SIZE;
+    int IDA64_ICON96_SIZE;
     QByteArray customIDA32imageData_48;
     QByteArray customIDA32imageData_64;
     QByteArray customIDA32imageData_96;
@@ -72,6 +81,7 @@ private slots:
     void on_actionClearLog_triggered();
 
     void on_actionAbout_triggered();
+    void setIDA_ICON_SIZE();
 
 private:
     Ui::MainWindow *ui;
