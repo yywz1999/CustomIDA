@@ -50,14 +50,6 @@ QString getIDAVersion(QString filepath){
 
 
 void MainWindow::setIDA_ICON_SIZE(){
-    if(IDAVersion == "8.3.230608"){
-        IDA32_ICON48_SIZE = 6021;
-        IDA32_ICON64_SIZE = 9737;
-        IDA32_ICON96_SIZE = 20066;
-        IDA64_ICON48_SIZE = 5862;
-        IDA64_ICON64_SIZE = 9499;
-        IDA64_ICON96_SIZE = 19606;
-    }
     if(IDAVersion == "7.5.200519"){
         IDA32_ICON48_SIZE = 5901;
         IDA32_ICON64_SIZE = 18062;
@@ -66,6 +58,24 @@ void MainWindow::setIDA_ICON_SIZE(){
         IDA64_ICON64_SIZE = 18062;
         IDA64_ICON96_SIZE = 129065;
     }
+    if(IDAVersion == "8.3.230608"){
+        IDA32_ICON48_SIZE = 6021;
+        IDA32_ICON64_SIZE = 9737;
+        IDA32_ICON96_SIZE = 20066;
+        IDA64_ICON48_SIZE = 5862;
+        IDA64_ICON64_SIZE = 9499;
+        IDA64_ICON96_SIZE = 19606;
+    }
+
+    if(IDAVersion == "8.4.240527"){ //8.4SP2
+        IDA32_ICON48_SIZE = 6021;
+        IDA32_ICON64_SIZE = 9737;
+        IDA32_ICON96_SIZE = 20066;
+        IDA64_ICON48_SIZE = 5862;
+        IDA64_ICON64_SIZE = 9499;
+        IDA64_ICON96_SIZE = 19606;
+    }
+
 }
 
 
@@ -181,7 +191,7 @@ void MainWindow::on_actionChangeIcon_triggered()
                                 idabinFile.resize(data.size());
                                 InsertLog("[+]IDA 96*96 png资源替换成功!(ida32_icon96->Offset:" + QString("0x%1").arg(startIdx, 0, 16) +")\n");
                             }
-    //                    qDebug() << "Offset:" << QString("0x%1").arg(startIdx, 0, 16) << "Size:" << matchSize;
+                        qDebug() << "Offset:" << QString("0x%1").arg(startIdx, 0, 16) << "Size:" << matchSize;
                     }
                 }
                 idabinFile.close();
@@ -339,12 +349,12 @@ void MainWindow::on_action_IDA64_triggered()
             if (customIDA64imageData_96.size() < IDA64_ICON96_SIZE-1) {
                 InsertLog("[+]文件符合要求, 点击“变更图标”进行替换.\n");
                 ida64_png_useful = 0;
-                //                QString customIDA64image_48_path = QDir::currentPath() + "/customIDA64image_48.png";
-                //                customIDA64image_48.save(customIDA64image_48_path, "PNG");
-                //                QString customIDA64image_64_path = QDir::currentPath() + "/customIDA64image_64.png";
-                //                customIDA64image_64.save(customIDA64image_64_path, "PNG");
-                //                QString customIDA64image_96_path = QDir::currentPath() + "/customIDA64image_96.png";
-                //                customIDA64image_96.save(customIDA64image_96_path, "PNG");
+                                QString customIDA64image_48_path = QDir::currentPath() + "/customIDA64image_48.png";
+                                customIDA64image_48.save(customIDA64image_48_path, "PNG");
+                                QString customIDA64image_64_path = QDir::currentPath() + "/customIDA64image_64.png";
+                                customIDA64image_64.save(customIDA64image_64_path, "PNG");
+                                QString customIDA64image_96_path = QDir::currentPath() + "/customIDA64image_96.png";
+                                customIDA64image_96.save(customIDA64image_96_path, "PNG");
             }else{
                 InsertLog("[-]图片太大啦!\n");
             }
@@ -390,6 +400,12 @@ void MainWindow::on_actionClearLog_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information(nullptr, "帮助", "IDA for MacOS.");
+    QMessageBox::information(nullptr, "帮助", "目前支持列表: \n"
+                            "IDA pro 7.5.200519 for MacOS\n"
+                            "IDA pro 8.3.230608 for MacOS\n"
+                            "IDA pro 8.4.240527 for MacOS\n"
+                            "\n"
+                            "项目地址: https://github.com/yywz1999/CustomIDA"
+    );
 }
 
