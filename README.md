@@ -6,6 +6,7 @@
  - 图片的大小尽量控制在128K以内.
  - 图片的尺寸最好是等比例(程序会自动进行裁剪).
  - 选择IDA.app即可, 不用选择IDA64.app
+ - IDA9.0版本, 没有ida64文件的情况下, 仅需修改IDA32图标即可.
 
 - 示例:
 <img width="1276" alt="image" src="https://github.com/yywz1999/CustomIDA/assets/35799450/f9063d97-74f0-443b-a886-fc9190f1834f">
