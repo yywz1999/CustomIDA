@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>CustomIDA for MacOS (ver.1.1)</string>
+   <string>CustomIDA for MacOS (ver.1.3)</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTextBrowser" name="textBrowser">

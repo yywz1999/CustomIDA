@@ -75,6 +75,14 @@ void MainWindow::setIDA_ICON_SIZE(){
         IDA64_ICON64_SIZE = 9499;
         IDA64_ICON96_SIZE = 19606;
     }
+    if(IDAVersion == "9.0.240925"){ //9.0RC1
+        IDA32_ICON48_SIZE = 5949;
+        IDA32_ICON64_SIZE = 9769;
+        IDA32_ICON96_SIZE = 20059;
+        IDA64_ICON48_SIZE = 5949;
+        IDA64_ICON64_SIZE = 9769;
+        IDA64_ICON96_SIZE = 20059;
+    }
 
 }
 
@@ -404,6 +412,7 @@ void MainWindow::on_actionAbout_triggered()
                             "IDA pro 7.5.200519 for MacOS\n"
                             "IDA pro 8.3.230608 for MacOS\n"
                             "IDA pro 8.4.240527 for MacOS\n"
+                            "IDA pro 9.0.240925 for MacOS\n"
                             "\n"
                             "项目地址: https://github.com/yywz1999/CustomIDA"
     );
